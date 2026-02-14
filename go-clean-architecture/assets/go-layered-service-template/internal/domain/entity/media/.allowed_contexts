@@ -1,0 +1,3 @@
+# One bounded context per line.
+# Empty means: do not allow cross-context imports into 'media' code by default.
+

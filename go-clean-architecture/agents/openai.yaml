@@ -1,0 +1,8 @@
+interface:
+  display_name: "Go Arquitetura em Camadas"
+  short_description: "Arquitetura em camadas + libs Go"
+  default_prompt: "Use $go-clean-architecture para estruturar um serviço Go em camadas com chi/slog e testes."
+
+policy:
+  allow_implicit_invocation: true
+

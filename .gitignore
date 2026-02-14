@@ -1,0 +1,18 @@
+.DS_Store
+
+# logs / temp
+*.log
+
+# env files
+.env
+.env.*
+!.env.example
+
+# caches
+.cache/
+**/.cache/
+
+# Go build / test artifacts
+coverage.out
+*.test
+

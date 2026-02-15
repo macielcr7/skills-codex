@@ -35,3 +35,7 @@ Obs.: versões recentes de dependências podem exigir versões mais novas do Go;
 ### **6. Testes automatizados**
 
 - `github.com/stretchr/testify`: Framework de testes para facilitar a escrita de testes unitários e de integração.
+
+### **7. Validação**
+
+- `github.com/asaskevich/govalidator`: Validação baseada em tags/structs (útil em entidades do domínio quando necessário).

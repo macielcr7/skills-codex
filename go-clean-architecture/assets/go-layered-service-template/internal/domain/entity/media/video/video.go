@@ -3,6 +3,8 @@ package video
 import (
 	"errors"
 	"strings"
+
+	"github.com/asaskevich/govalidator"
 )
 
 // Status defines the processing status of a video.
@@ -30,35 +32,46 @@ var (
 
 // Video represents a video to be processed (bounded context: media).
 type Video struct {
-	ID           string
-	Title        string
-	FilePath     string
+	ID           string `valid:"required"`
+	Title        string `valid:"required"`
+	FilePath     string `valid:"required"`
 	Status       Status
 	ErrorMessage string
 }
 
 // New creates a new Video enforcing domain invariants.
 func New(id, title, filePath string) (Video, error) {
-	if strings.TrimSpace(id) == "" {
-		return Video{}, ErrInvalidID
-	}
-	if strings.TrimSpace(title) == "" {
-		return Video{}, ErrInvalidTitle
-	}
-	if strings.TrimSpace(filePath) == "" {
-		return Video{}, ErrInvalidFilePath
-	}
-
-	return Video{
+	v := Video{
 		ID:       id,
 		Title:    title,
 		FilePath: filePath,
 		Status:   StatusPending,
-	}, nil
+	}
+
+	if err := v.Validate(); err != nil {
+		return Video{}, err
+	}
+
+	return v, nil
+}
+
+// Validate validates the entity fields and domain invariants.
+func (v Video) Validate() error {
+	if strings.TrimSpace(v.ID) == "" {
+		return ErrInvalidID
+	}
+	if strings.TrimSpace(v.Title) == "" {
+		return ErrInvalidTitle
+	}
+	if strings.TrimSpace(v.FilePath) == "" {
+		return ErrInvalidFilePath
+	}
+
+	_, err := govalidator.ValidateStruct(v)
+	return err
 }
 
 // CanBeProcessed reports whether the video can be (re)processed.
 func (v Video) CanBeProcessed() bool {
 	return v.Status == StatusPending || v.Status == StatusFailed
 }
-

@@ -24,6 +24,20 @@ func TestNew_Invalid(t *testing.T) {
 	require.ErrorIs(t, err, ErrInvalidFilePath)
 }
 
+func TestVideo_Validate(t *testing.T) {
+	err := (Video{}).Validate()
+	require.ErrorIs(t, err, ErrInvalidID)
+
+	err = (Video{ID: "v1"}).Validate()
+	require.ErrorIs(t, err, ErrInvalidTitle)
+
+	err = (Video{ID: "v1", Title: "t"}).Validate()
+	require.ErrorIs(t, err, ErrInvalidFilePath)
+
+	err = (Video{ID: "v1", Title: "t", FilePath: "/tmp/a.mp4"}).Validate()
+	require.NoError(t, err)
+}
+
 func TestVideo_CanBeProcessed(t *testing.T) {
 	v, err := New("v1", "title", "/tmp/file.mp4")
 	require.NoError(t, err)
@@ -35,4 +49,3 @@ func TestVideo_CanBeProcessed(t *testing.T) {
 	v.Status = StatusProcessing
 	require.False(t, v.CanBeProcessed())
 }
-

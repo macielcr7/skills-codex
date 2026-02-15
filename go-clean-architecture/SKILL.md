@@ -121,6 +121,7 @@ Padrões:
 - S3: `github.com/aws/aws-sdk-go-v2` + LocalStack `github.com/localstack/localstack-go`
 - Env local: `github.com/joho/godotenv`
 - UUID: `github.com/google/uuid`
+- Validação: `github.com/asaskevich/govalidator`
 - Testes: `github.com/stretchr/testify`
 
 ## Estratégia de testes

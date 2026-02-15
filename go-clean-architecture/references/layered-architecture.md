@@ -69,7 +69,7 @@ domain/
 
 #### Diretrizes:
 - Não deve depender de nenhuma outra camada
-- Não deve importar pacotes externos exceto os da biblioteca padrão Go (código de produção)
+- Não deve importar pacotes externos exceto os da biblioteca padrão Go (código de produção), **salvo exceções explícitas** (ex.: validação com `github.com/asaskevich/govalidator`)
 - Deve conter apenas regras de negócio puras
 - Deve definir interfaces que serão implementadas por camadas externas
 

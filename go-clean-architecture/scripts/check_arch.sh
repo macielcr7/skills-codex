@@ -61,9 +61,14 @@ check "internal/domain/**/*.go" "internal/application" "domain importing applica
 check "internal/domain/**/*.go" "internal/infra" "domain importing infra"
 check "internal/application/**/*.go" "internal/infra" "application importing infra"
 
-if (cd "$project_root" && rg -n --glob "internal/domain/**/*.go" --glob "!**/*_test.go" "\"github.com/" . >/dev/null); then
-  echo "FAIL: domain production code importing external packages" >&2
-  (cd "$project_root" && rg -n --glob "internal/domain/**/*.go" --glob "!**/*_test.go" "\"github.com/" . >&2) || true
+domain_external="$(
+  (cd "$project_root" && rg -n --glob "internal/domain/**/*.go" --glob "!**/*_test.go" "\"github.com/" .) \
+    | rg -v "github.com/asaskevich/govalidator" \
+    || true
+)"
+if [[ -n "$domain_external" ]]; then
+  echo "FAIL: domain production code importing external packages (allowed: github.com/asaskevich/govalidator)" >&2
+  echo "$domain_external" >&2
   fail=1
 fi
 

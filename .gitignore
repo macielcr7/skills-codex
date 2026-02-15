@@ -16,3 +16,6 @@
 coverage.out
 *.test
 
+# local Go cache (quando GOCACHE aponta para o projeto)
+.gocache/
+**/.gocache/

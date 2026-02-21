@@ -1,0 +1,8 @@
+interface:
+  display_name: "Node.js Clean Architecture (TS)"
+  short_description: "NestJS + DDD + testes"
+  default_prompt: "Use $nodejs-clean-architecture para estruturar um serviço Node.js/TypeScript em camadas (domain/application/infra + cmd) com DDD, Zod, Prisma e Vitest."
+
+policy:
+  allow_implicit_invocation: true
+

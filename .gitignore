@@ -19,3 +19,13 @@ coverage.out
 # local Go cache (quando GOCACHE aponta para o projeto)
 .gocache/
 **/.gocache/
+
+# Node
+node_modules/
+**/node_modules/
+dist/
+**/dist/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*

@@ -1,0 +1,36 @@
+{
+  "name": "@example/ts-layered-service",
+  "private": true,
+  "type": "module",
+  "imports": {
+    "#/*": "./dist/*.js"
+  },
+  "scripts": {
+    "dev": "concurrently -k -n tsc,node \"tsc -w -p tsconfig.json\" \"node --watch dist/main.js\"",
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/main.js",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "check:arch": "bash scripts/check_arch.sh .",
+    "db:generate": "prisma generate",
+    "db:migrate": "prisma migrate dev"
+  },
+  "dependencies": {
+    "@nestjs/common": "^10.0.0",
+    "@nestjs/core": "^10.0.0",
+    "@nestjs/platform-express": "^10.0.0",
+    "@prisma/client": "^5.0.0",
+    "reflect-metadata": "^0.2.0",
+    "rxjs": "^7.8.0",
+    "zod": "^3.23.0"
+  },
+  "devDependencies": {
+    "@nestjs/testing": "^10.0.0",
+    "@types/node": "^20.0.0",
+    "concurrently": "^8.0.0",
+    "prisma": "^5.0.0",
+    "typescript": "^5.0.0",
+    "vite-tsconfig-paths": "^4.0.0",
+    "vitest": "^1.0.0"
+  }
+}
